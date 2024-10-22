@@ -1,0 +1,8 @@
+{
+  "javascript.preferences.importModuleSpecifier": "non-relative", // JavaScriptのインポートを非相対パスにする設定
+  "typescript.preferences.importModuleSpecifier": "non-relative", // TypeScriptのインポートを非相対パスにする設定
+  "editor.formatOnSave": true, // 保存時に自動フォーマットを有効にする設定
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit" // 保存時にインポートの整理を明示的に行う設定
+  }
+}
