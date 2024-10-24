@@ -31,7 +31,6 @@ export const useAnnounce = (): UseAnnounce => {
         { time: 3002 - 55 * 60, file: '05_5minutesAgo.wav' },
         { time: 3002 - 57 * 60, file: '06_3minutesAgo.wav' },
         { time: 3002 - 59 * 60, file: '07_1minutesAgo.wav' },
-        { time: 3002 - 3002, file: '08_end.wav' },
       ];
 
       const announcement = announcements.find((a) => a.time === time);
