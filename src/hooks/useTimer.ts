@@ -66,7 +66,7 @@ export const useTimer = (): UseTimer => {
               if (intervalRef.current) {
                 clearInterval(intervalRef.current);
               }
-              announce('end.wav');
+              announce('08_end.wav');
               return 0;
             }
             // アナウンスのチェック
