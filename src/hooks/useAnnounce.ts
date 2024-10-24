@@ -8,7 +8,7 @@ type UseAnnounce = {
 export const useAnnounce = (): UseAnnounce => {
   // 音声を再生する関数
   const announce = async (audioFile: string): Promise<void> => {
-    // try {
+    try {
     const audio = new Audio(`/audio/${audioFile}`);
 
     return new Promise<void>((resolve, reject) => {
@@ -16,10 +16,10 @@ export const useAnnounce = (): UseAnnounce => {
       audio.onerror = () => reject(new Error('音声の再生に失敗しました'));
       audio.play().catch(reject);
     });
-    // } catch (error) {
-    //   console.error('音声再生エラー:', error);
-    //   throw error;
-    // }
+    } catch (error) {
+      console.error('音声再生エラー:', error);
+      throw error;
+    }
   };
 
   // アナウンスのタイミングをチェックする関数
