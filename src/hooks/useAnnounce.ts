@@ -8,18 +8,18 @@ type UseAnnounce = {
 export const useAnnounce = (): UseAnnounce => {
   // 音声を再生する関数
   const announce = async (audioFile: string): Promise<void> => {
-    // try {
-    const audio = new Audio(`/audio/${audioFile}`);
+    try {
+      const audio = new Audio(`/audio/${audioFile}`);
 
-    return new Promise<void>((resolve, reject) => {
-      audio.onended = () => resolve();
-      audio.onerror = () => reject(new Error('音声の再生に失敗しました'));
-      audio.play().catch(reject);
-    });
-    // } catch (error) {
-    //   console.error('音声再生エラー:', error);
-    //   throw error;
-    // }
+      return new Promise<void>((resolve, reject) => {
+        audio.onended = () => resolve();
+        audio.onerror = () => reject(new Error('音声の再生に失敗しました'));
+        audio.play().catch(reject);
+      });
+    } catch (error) {
+      console.error('音声再生エラー:', error);
+      throw error;
+    }
   };
 
   // アナウンスのタイミングをチェックする関数
@@ -28,9 +28,9 @@ export const useAnnounce = (): UseAnnounce => {
       const announcements = [
         { time: 3002 - 10 * 60, file: '03_10minProgress.wav' },
         { time: 3002 - 35 * 60, file: '04_35minProgress.wav' },
-        { time: 3002 - 55 * 60, file: '05_5minutesAgo.wav' },
-        { time: 3002 - 57 * 60, file: '06_3minutesAgo.wav' },
-        { time: 3002 - 59 * 60, file: '07_1minutesAgo.wav' },
+        { time: 3002 - 1 * 60, file: '05_5minutesAgo.wav' },
+        { time: 3002 - 2 * 60, file: '06_3minutesAgo.wav' },
+        { time: 3002 - 3 * 60, file: '07_1minutesAgo.wav' },
       ];
 
       const announcement = announcements.find((a) => a.time === time);
