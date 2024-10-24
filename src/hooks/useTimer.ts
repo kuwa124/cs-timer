@@ -103,7 +103,7 @@ export const useTimer = (): UseTimer => {
     }
     setIsRunning(false);
     setIsPaused(false);
-    setTimeRemaining(60 * 60);
+    setTimeRemaining(50 * 60);
   }, []);
 
   // 時間をフォーマットする関数
