@@ -47,6 +47,7 @@ export const Timer = () => {
           停止
         </button>
       </div>
+      <p className='text-gray-400 mt-20 text-center'>VOICEVOX:四国めたん</p>
     </div>
   );
 };
