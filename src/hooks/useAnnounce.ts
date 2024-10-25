@@ -13,7 +13,7 @@ export const useAnnounce = (): UseAnnounce => {
   const announce = (audioFile: string): void => {
     // 新しい Audio オブジェクトを作成（指定された音声ファイルを読み込む）
     const audio = new Audio(`/audio/${audioFile}`);
-
+    // 音声を再生
     audio.play();
   };
 
@@ -30,7 +30,9 @@ export const useAnnounce = (): UseAnnounce => {
         { time: 3000 - 49 * 60, file: '07_1minutesAgo.wav' },
       ];
 
+      // 現在の時間に一致するアナウンスを検索
       const announcement = announcements.find((a) => a.time === time);
+      // アナウンスが見つかった場合、対応する音声を再生
       if (announcement) {
         announce(announcement.file);
       }
