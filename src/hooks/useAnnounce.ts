@@ -1,25 +1,20 @@
 import { useCallback } from 'react';
 
 type UseAnnounce = {
-  announce: (audioFile: string) => Promise<void>;
+  // 音声ファイル名を受け取り、何も返さない関数
+  announce: (audioFile: string) => void;
+  // 時間（数値）を受け取り、何も返さない関数
   checkAnnouncements: (time: number) => void;
 };
 
 export const useAnnounce = (): UseAnnounce => {
-  // 音声を再生する関数
-  const announce = async (audioFile: string): Promise<void> => {
-    // try {
-      const audio = new Audio(`/audio/${audioFile}`);
+  // 音声を再生する関数を定義
+  // audioFile: 再生する音声ファイルの名前を受け取る
+  const announce = (audioFile: string): void => {
+    // 新しい Audio オブジェクトを作成（指定された音声ファイルを読み込む）
+    const audio = new Audio(`/audio/${audioFile}`);
 
-      return new Promise<void>((resolve, reject) => {
-        audio.onended = () => resolve();
-        audio.onerror = () => reject(new Error('音声の再生に失敗しました'));
-        audio.play().catch(reject);
-      });
-    // } catch (error) {
-    //   console.error('音声再生エラー:', error);
-    //   throw error;
-    // }
+    audio.play();
   };
 
   // アナウンスのタイミングをチェックする関数
@@ -36,11 +31,9 @@ export const useAnnounce = (): UseAnnounce => {
       ];
 
       const announcement = announcements.find((a) => a.time === time);
-      // if (announcement) {
-      //   announce(announcement.file).catch((error) => {
-      //     console.error('アナウンスの再生に失敗しました:', error);
-      //   });
-      // }
+      if (announcement) {
+        announce(announcement.file);
+      }
     },
     [announce]
   );
