@@ -26,6 +26,10 @@ export const useTimer = (): UseTimer => {
   // 同じ時間での二重アナウンスを防止
   const lastAnnouncementTimeRef = useRef<number | null>(null);
 
+  // タイマー終了フラグを保持するref
+  // 終了アナウンスの二重再生を防止
+  const isEndingRef = useRef<boolean>(false);
+
   // アナウンス機能を使用
   const { announce, checkAnnouncements } = useAnnounce();
 
@@ -35,26 +39,44 @@ export const useTimer = (): UseTimer => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   };
 
-  // タイマー更新とアナウンスチェックを分離するためのeffect
-  // 時間が変化したときのみアナウンスをチェックします
+  // タイマー終了時の処理を行う関数
+  const handleTimerEnd = useCallback(async () => {
+    // 終了処理が既に実行されている場合は処理をスキップ
+    if (isEndingRef.current) return;
+
+    // 終了処理フラグを立てる
+    isEndingRef.current = true;
+
+    // インターバルをクリア
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    // 終了アナウンスを再生
+    await announce('08_end.wav');
+
+    // タイマーの状態をリセット
+    setIsRunning(false);
+    isEndingRef.current = false;
+  }, [announce]);
+
+  // タイマーの時間更新とアナウンスのチェックを行うeffect
   useEffect(() => {
     if (isRunning && !isPaused) {
       // 前回のアナウンス時間と異なる場合のみチェック（二重再生防止）
       if (timeRemaining !== lastAnnouncementTimeRef.current) {
         lastAnnouncementTimeRef.current = timeRemaining;
+
+        // 残り時間に応じたアナウンスをチェック
         checkAnnouncements(timeRemaining);
 
         // タイマーが0になった場合の処理
         if (timeRemaining === 0) {
-          // タイマーを停止
-          if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-          }
-          setIsRunning(false);
+          handleTimerEnd();
         }
       }
     }
-  }, [timeRemaining, isRunning, isPaused, checkAnnouncements]);
+  }, [timeRemaining, isRunning, isPaused, checkAnnouncements, handleTimerEnd]);
 
   // タイマーを開始する関数
   // async/awaitを使用して音声の再生を順番に行います
@@ -116,6 +138,7 @@ export const useTimer = (): UseTimer => {
     setIsPaused(false);
     setTimeRemaining(50 * 60); // 50分にリセット
     lastAnnouncementTimeRef.current = null; // アナウンス時間もリセット
+    isEndingRef.current = false; // 終了フラグもリセット
   }, []);
 
   // 時間をフォーマットする関数
@@ -123,6 +146,7 @@ export const useTimer = (): UseTimer => {
   const formatTime = useCallback((seconds: number): string => {
     const minutes = Math.floor(seconds / 60); // 分を計算
     const remainingSeconds = seconds % 60; // 残りの秒を計算
+    // 秒が1桁の場合は先頭に0を付加
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`; // 10秒未満の場合は0を付加
   }, []);
 
