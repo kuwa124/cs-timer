@@ -1,3 +1,4 @@
+
 import { useAnnounce } from '@/hooks/useAnnounce';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -8,7 +9,7 @@ type UseTimer = {
   startTimer: () => void; // タイマーを開始する関数
   pauseTimer: () => void; // タイマーを一時停止する関数
   stopTimer: () => void; // タイマーを停止する関数
-  formatTime: (seconds: number) => string; // 時間をフォーマットする関数
+  formatTime: (seconds: number) => string; // 時間を「分:秒」形式にフォーマットする関数
 };
 
 export const useTimer = (): UseTimer => {
@@ -17,15 +18,15 @@ export const useTimer = (): UseTimer => {
   const [isPaused, setIsPaused] = useState<boolean>(false); // 一時停止中かどうか
   const [isStartCountdown, setIsStartCountdown] = useState<boolean>(false); // 開始前のカウントダウン中かどうか
 
-  // タイマーのインターバルを保持するref
-  // useRefを使うことで、値が変更されても再レンダリングが発生しない
+  // setInterval のIDを保持するref
+  // useRefを使用することで、値が変更されても再レンダリングが発生しない
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // 最後にアナウンスした時間を記録するref
-  // 二重再生を防ぐために使用
+  // 同じ時間での二重アナウンスを防止
   const lastAnnouncementTimeRef = useRef<number | null>(null);
 
-  // アナウンス機能のフックを使用
+  // アナウンス機能を使用
   const { announce, checkAnnouncements } = useAnnounce();
 
   // 指定された時間(ミリ秒)だけ待機する関数
@@ -38,11 +39,19 @@ export const useTimer = (): UseTimer => {
   // 時間が変化したときのみアナウンスをチェックします
   useEffect(() => {
     if (isRunning && !isPaused) {
-      // 現在の時間が最後のアナウンス時間と異なる場合のみチェック
-      // これにより二重再生を防ぎます
+      // 前回のアナウンス時間と異なる場合のみチェック（二重再生防止）
       if (timeRemaining !== lastAnnouncementTimeRef.current) {
         lastAnnouncementTimeRef.current = timeRemaining;
         checkAnnouncements(timeRemaining);
+
+        // タイマーが0になった場合の処理
+        if (timeRemaining === 0) {
+          // タイマーを停止
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+          }
+          setIsRunning(false);
+        }
       }
     }
   }, [timeRemaining, isRunning, isPaused, checkAnnouncements]);
@@ -50,29 +59,24 @@ export const useTimer = (): UseTimer => {
   // タイマーを開始する関数
   // async/awaitを使用して音声の再生を順番に行います
   const startTimer = useCallback(async () => {
+    // タイマーが未実行で、開始前カウントダウンも行われていない場合
     if (!isRunning && !isStartCountdown) {
       try {
-        // カウントダウン開始の状態をセット
-        setIsStartCountdown(true);
+        setIsStartCountdown(true); // カウントダウン開始
 
-        // 開始時のアナウンスを順番に再生
-        await announce('01_ready.wav'); // 「準備」の音声を再生
+        // 開始時の音声を順番に再生
+        await announce('01_ready.wav'); // 「準備」音声
         await sleep(2000); // 2秒待機
-        await announce('02_start.wav'); // 「スタート」の音声を再生
+        await announce('02_start.wav'); // 「スタート」音声
 
-        // タイマー開始の準備
+        // タイマー開始
         setIsStartCountdown(false);
         setIsRunning(true);
 
-        // 1秒ごとにタイマーを更新するインターバルを設定
+        // 1秒ごとにタイマーを更新
         intervalRef.current = setInterval(() => {
           setTimeRemaining((prevTime) => {
             if (prevTime <= 0) {
-              // タイマーが0になったら終了処理
-              if (intervalRef.current) {
-                clearInterval(intervalRef.current);
-              }
-              announce('08_end.wav'); // 終了の音声を再生
               return 0;
             }
             return prevTime - 1; // 1秒減らす
@@ -96,17 +100,18 @@ export const useTimer = (): UseTimer => {
   const pauseTimer = useCallback(() => {
     // インターバルをクリアして一時停止状態にする
     if (intervalRef.current) {
-      clearInterval(intervalRef.current);
+      clearInterval(intervalRef.current); // インターバルをクリア
     }
-    setIsPaused(true);
+    setIsPaused(true); // 一時停止状態にする
   }, []);
 
   // タイマーを停止してリセットする関数
   const stopTimer = useCallback(() => {
     // タイマーを完全に停止し、すべての状態を初期値に戻す
     if (intervalRef.current) {
-      clearInterval(intervalRef.current);
+      clearInterval(intervalRef.current); // インターバルをクリア
     }
+    // すべての状態を初期値にリセット
     setIsRunning(false);
     setIsPaused(false);
     setTimeRemaining(50 * 60); // 50分にリセット
