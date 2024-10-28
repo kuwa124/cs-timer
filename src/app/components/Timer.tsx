@@ -2,7 +2,11 @@
 
 import { useTimer } from '@/hooks/useTimer';
 
-export const Timer = () => {
+type TimerProps = {
+  title: string;
+};
+
+export const Timer = ({ title }: TimerProps) => {
   const {
     formatTime,
     isPaused,
@@ -16,7 +20,7 @@ export const Timer = () => {
   return (
     <div>
       <h1 className='text-gray-600 tracking-wide text-center text-4xl'>
-        Word計測
+        {title}
       </h1>
       {/* タイマー表示 */}
       <div className='text-[300px] font-bold text-gray-800 mb-6 text-center'>
