@@ -1,5 +1,6 @@
 'use client';
 
+import { ReturnHome } from '@/app/components/ReturnHome';
 import { useTimer } from '@/hooks/useTimer';
 
 type TimerProps = {
@@ -18,12 +19,20 @@ export const Timer = ({ title }: TimerProps) => {
   } = useTimer();
 
   return (
-    <div>
-      <h1 className='text-gray-600 tracking-wide text-center text-4xl'>
-        {title}
-      </h1>
+    <div className='p-4'>
+      {/* タイトル部分 */}
+      <div className='flex justify-between items-center'>
+        <div className='flex-1'></div>
+        <h1 className='text-gray-600 tracking-wide text-center text-4xl'>
+          {title}
+        </h1>
+        <div className='flex-1 text-right'>
+          <ReturnHome />
+        </div>
+      </div>
+
       {/* タイマー表示 */}
-      <div className='text-[300px] font-bold text-gray-800 mb-6 text-center'>
+      <div className='text-[300px] font-bold text-gray-800  text-center'>
         {formatTime(timeRemaining)}
       </div>
 
@@ -51,7 +60,7 @@ export const Timer = ({ title }: TimerProps) => {
           停止
         </button>
       </div>
-      <p className='text-gray-400 mt-20 text-center'>VOICEVOX:四国めたん</p>
+      <p className='text-gray-400 mt-10 text-center'>VOICEVOX:四国めたん</p>
     </div>
   );
 };
