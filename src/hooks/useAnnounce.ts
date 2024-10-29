@@ -35,6 +35,7 @@ export const useAnnounce = (): UseAnnounce => {
 
     try {
       // 新しい Audio オブジェクトを作成
+      // publicフォルダからの相対パス(publicディレクトリは自動的にルート)
       const audio = new Audio(`/audio/${nextItem.audioFile}`);
 
       // 音声ファイルが正常にロードされた時のイベントリスナー
