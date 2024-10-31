@@ -9,11 +9,11 @@ type NavigationButton = {
 // ナビゲーションボタン定義
 const navigationButtons: NavigationButton[] = [
   {
-    label: 'Word3級',
+    label: 'Word3級計測',
     path: '/word3Class',
   },
   {
-    label: 'Word3級計測',
+    label: 'Word3級計測試験前',
     path: '/Word3BeforeTesting',
   },
   // {

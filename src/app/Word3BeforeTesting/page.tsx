@@ -15,7 +15,7 @@ const Word3BeforeTesting = () => {
   return (
     <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
       <Timer
-        title='Word3級計測'
+        title='Word3級計測試験前'
         announcements={Word3BeforeTestingAnnouncements}
       />
     </div>
