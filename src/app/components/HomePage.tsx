@@ -13,7 +13,7 @@ const navigationButtons: NavigationButton[] = [
     path: '/word3Class',
   },
   {
-    label: 'Word3級',
+    label: 'Word3級計測',
     path: '/Word3BeforeTesting',
   },
   // {
