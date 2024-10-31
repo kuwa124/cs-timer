@@ -1,3 +1,4 @@
+import { Announcoments } from '@/types/type';
 import { useCallback, useRef } from 'react';
 
 // 音声キューのアイテム型を定義
@@ -15,7 +16,8 @@ type UseAnnounce = {
   checkAnnouncements: (time: number) => void;
 };
 
-export const useAnnounce = (): UseAnnounce => {
+// フックの引数として announcements を受け取る
+export const useAnnounce = (announcements: Announcoments[]): UseAnnounce => {
   // 音声キューを管理するための参照を作成
   const queueRef = useRef<QueueItem[]>([]);
   // 現在再生中かどうかを管理する参照を作成
@@ -105,16 +107,6 @@ export const useAnnounce = (): UseAnnounce => {
   // アナウンスのタイミングをチェックする関数
   const checkAnnouncements = useCallback(
     (time: number) => {
-      const announcements = [
-        // 50分（3000秒）から経過した分数後にアナウンス
-        // 何分経過後のアナウンスか、わかりやすいように「○○ * 60」で記載
-        { time: 3000 - 10 * 60, file: '03_10minProgress.wav' },
-        { time: 3000 - 35 * 60, file: '04_35minProgress.wav' },
-        { time: 3000 - 45 * 60, file: '05_5minutesAgo.wav' },
-        { time: 3000 - 47 * 60, file: '06_3minutesAgo.wav' },
-        { time: 3000 - 49 * 60, file: '07_1minutesAgo.wav' },
-      ];
-
       // 現在の時間に一致するアナウンスを検索
       const announcement = announcements.find((a) => a.time === time);
 
@@ -126,7 +118,7 @@ export const useAnnounce = (): UseAnnounce => {
         });
       }
     },
-    [announce]
+    [announce, announcements]
   );
 
   return { announce, checkAnnouncements };

@@ -2,12 +2,14 @@
 
 import { ReturnHome } from '@/app/components/ReturnHome';
 import { useTimer } from '@/hooks/useTimer';
+import { Announcoments } from '@/types/type';
 
 type TimerProps = {
   title: string;
+  announcements: Announcoments[];
 };
 
-export const Timer = ({ title }: TimerProps) => {
+export const Timer = ({ title, announcements }: TimerProps) => {
   const {
     formatTime,
     isPaused,
@@ -16,7 +18,7 @@ export const Timer = ({ title }: TimerProps) => {
     startTimer,
     stopTimer,
     timeRemaining,
-  } = useTimer();
+  } = useTimer(announcements);
 
   return (
     <div className='p-4'>

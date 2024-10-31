@@ -12,10 +12,10 @@ const navigationButtons: NavigationButton[] = [
     label: 'Word3級',
     path: '/word3Class',
   },
-  // {
-  //   label: 'ストップウォッチ',
-  //   path: '',
-  // },
+  {
+    label: 'Word3級',
+    path: '/Word3BeforeTesting',
+  },
   // {
   //   label: 'アラーム',
   //   path: '',
