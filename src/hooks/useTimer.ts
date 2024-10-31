@@ -1,5 +1,6 @@
 
 import { useAnnounce } from '@/hooks/useAnnounce';
+import { Announcoments } from '@/types/type';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 type UseTimer = {
@@ -12,7 +13,7 @@ type UseTimer = {
   formatTime: (seconds: number) => string; // 時間を「分:秒」形式にフォーマットする関数
 };
 
-export const useTimer = (): UseTimer => {
+export const useTimer = (announcements: Announcoments[]): UseTimer => {
   const [timeRemaining, setTimeRemaining] = useState<number>(50 * 60); // 残り時間の状態（秒）50分を秒に変換
   const [isRunning, setIsRunning] = useState<boolean>(false); // タイマーが動作中かどうか
   const [isPaused, setIsPaused] = useState<boolean>(false); // 一時停止中かどうか
@@ -31,7 +32,7 @@ export const useTimer = (): UseTimer => {
   const isEndingRef = useRef<boolean>(false);
 
   // アナウンス機能を使用
-  const { announce, checkAnnouncements } = useAnnounce();
+  const { announce, checkAnnouncements } = useAnnounce(announcements);
 
   // 指定された時間(ミリ秒)だけ待機する関数
   // Promiseを使って非同期の待機処理を実現します
