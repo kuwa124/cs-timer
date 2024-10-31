@@ -1,30 +1,6 @@
+import { navigationButtons } from '@/constants/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-
-type NavigationButton = {
-  label: string; // ボタンに表示するラベル
-  path: string; // ボタンをクリックした際の遷移先のパス
-};
-
-// ナビゲーションボタン定義
-const navigationButtons: NavigationButton[] = [
-  {
-    label: 'Word3級計測',
-    path: '/word3Class',
-  },
-  {
-    label: 'Word3級計測試験前',
-    path: '/Word3BeforeTesting',
-  },
-  // {
-  //   label: 'アラーム',
-  //   path: '',
-  // },
-  // {
-  //   label: '設定',
-  //   path: '',
-  // },
-];
 
 export const HomePage = () => {
   return (
@@ -51,12 +27,12 @@ export const HomePage = () => {
         <nav className='flex flex-col items-center space-y-4 text-gray-600'>
           {navigationButtons.map((navi) => (
             <Link
-              key={navi.label}
+              key={navi.title}
               href={navi.path}
               className='w-56 mx-auto px-8 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition'
-              aria-label={`${navi.label}へ移動`}
+              aria-label={`${navi.title}へ移動`}
             >
-              {navi.label}
+              {navi.title}
             </Link>
           ))}
         </nav>

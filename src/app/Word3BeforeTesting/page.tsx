@@ -1,4 +1,5 @@
 import { Timer } from '@/app/components/Timer';
+import { getPageData } from '@/constants/pageConfig';
 import { Announcoments } from '@/types/type';
 
 const Word3BeforeTestingAnnouncements: Announcoments[] = [
@@ -15,7 +16,7 @@ const Word3BeforeTesting = () => {
   return (
     <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
       <Timer
-        title='Word3級計測試験前'
+        title={getPageData('WORD3_BEFORE_TESTING').title}
         announcements={Word3BeforeTestingAnnouncements}
       />
     </div>
