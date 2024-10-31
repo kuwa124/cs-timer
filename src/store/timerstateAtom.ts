@@ -7,6 +7,7 @@ type Timerstate = {
   isStartCountdown: boolean;
 };
 
+// タイマーの状態を管理するatom
 export const timerstateAtom = atom<Timerstate>({
   key: 'timerstate', // 一意のキー
   default: {
