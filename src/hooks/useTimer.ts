@@ -20,7 +20,7 @@ export const useTimer = (announcements: Announcoments[]): UseTimer => {
   const [lastAnnouncementTimeState, setLastAnnouncementTimeState] =
     useRecoilState(lastAnnouncementTimeStateAtom);
   const [isEndingState, setIsEndingState] = useRecoilState(isEndingStateAtom);
-  const [announcementsState, setAnnouncementsState] = useRecoilState(
+  const [, setAnnouncementsState] = useRecoilState(
     announcementsStateAtom
   );
 
@@ -113,7 +113,13 @@ export const useTimer = (announcements: Announcoments[]): UseTimer => {
         }));
       }, 1000);
     }
-  }, [timerstate.isRunning, timerstate.isPaused, announce]);
+  }, [
+    timerstate.isRunning,
+    timerstate.isPaused,
+    timerstate.isStartCountdown,
+    setTimerstate,
+    announce,
+  ]);
 
   // タイマーを一時停止する関数
   const pauseTimer = useCallback(() => {
@@ -172,6 +178,8 @@ export const useTimer = (announcements: Announcoments[]): UseTimer => {
     timerstate.timeRemaining,
     timerstate.isRunning,
     timerstate.isPaused,
+    lastAnnouncementTimeState,
+    setLastAnnouncementTimeState,
     checkAnnouncements,
     handleTimerEnd,
   ]);
