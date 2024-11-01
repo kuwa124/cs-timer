@@ -1,3 +1,4 @@
+import { ClientLayout } from '@/app/ClientLayout';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
@@ -34,7 +35,7 @@ export default function RootLayout({
         // カスタムフォントのプロパティとantialiasedクラスを適用
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
