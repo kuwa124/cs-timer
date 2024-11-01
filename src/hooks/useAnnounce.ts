@@ -1,14 +1,22 @@
 import { Announcoments } from '@/types/type';
 import { useCallback, useRef } from 'react';
 
-// 音声キューのアイテム型を定義
+/** 音声キュー(待ち配列）のアイテム型を定義
+ *  @property {string} audioFile - 再生する音声ファイル名
+ *  @property {() => void} onComplete - 再生完了時に実行するコールバック関数
+ */
 type QueueItem = {
-  // 再生する音声ファイル名
+  /** 再生する音声ファイル名 */
   audioFile: string;
-  // 再生完了時に実行するコールバック関数
+  /** 再生完了時に実行するコールバック関数 */
   onComplete?: () => void;
 };
 
+/**
+ * 音声通知に関する関数をまとめた型
+ * @property {(audioFile: string) => Promise<void>} announce - 音声ファイル名を受け取り、Promiseを返す関数
+ * @property {(time: number) => void} checkAnnouncements - 時間（数値）を受け取り、何も返さない関数
+ */
 type UseAnnounce = {
   // 音声ファイル名を受け取り、Promiseを返す関数
   announce: (audioFile: string) => Promise<void>;

@@ -10,15 +10,8 @@ type TimerProps = {
 };
 
 export const Timer = ({ title, announcements }: TimerProps) => {
-  const {
-    formatTime,
-    isPaused,
-    isRunning,
-    pauseTimer,
-    startTimer,
-    stopTimer,
-    timeRemaining,
-  } = useTimer(announcements);
+  const { timerstate, formatTime, pauseTimer, startTimer, stopTimer } =
+    useTimer(announcements);
 
   return (
     <div className='p-4'>
@@ -35,17 +28,17 @@ export const Timer = ({ title, announcements }: TimerProps) => {
 
       {/* タイマー表示 */}
       <div className='text-[300px] font-bold text-gray-800  text-center'>
-        {formatTime(timeRemaining)}
+        {formatTime(timerstate.timeRemaining)}
       </div>
 
       {/* ボタンコンテナ */}
       <div className='flex justify-center space-x-4'>
-        {!isRunning || isPaused ? (
+        {!timerstate.isRunning || timerstate.isPaused ? (
           <button
             className='px-6 py-3 bg-green-400 shadow-lg w-32 text-white rounded-lg text-xl hover:bg-green-600 transition-colors duration-300'
             onClick={startTimer}
           >
-            {isPaused ? '再開' : '再生'}
+            {timerstate.isPaused ? '再開' : '再生'}
           </button>
         ) : (
           <button

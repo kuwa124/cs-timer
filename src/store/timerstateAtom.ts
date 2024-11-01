@@ -1,7 +1,6 @@
 import { atom } from 'recoil';
 
-
-type TimerstateAtom = {
+export type TimerstateAtom = {
   /** タイマーの残り時間 */
   timeRemaining: number;
   /** タイマーが動作中かどうかのフラグ */
@@ -12,7 +11,14 @@ type TimerstateAtom = {
   isStartCountdown: boolean;
 };
 
-/** タイマーの状態を管理するatom */
+/**
+ * タイマーのデフォルト状態
+ * @type {TimerstateAtom}
+ * @property {number} timeRemaining タイマーの残り時間（デフォルトは50分）
+ * @property {boolean} isRunning タイマーが動作中でないことを示す初期フラグ
+ * @property {boolean} isPaused タイマーが一時停止中でないことを示す初期フラグ
+ * @property {boolean} isStartCountdown カウントダウンが開始されていないことを示す初期フラグ
+ */
 export const timerstateAtom = atom<TimerstateAtom>({
   key: 'timerstateAtom', // 一意のキー
   default: {
