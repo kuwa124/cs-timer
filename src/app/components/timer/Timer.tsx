@@ -37,7 +37,7 @@ export const Timer = ({ title, announcements }: TimerProps) => {
         isPaused={timerstate.isPaused}
         startTimer={startTimer}
         pauseTimer={pauseTimer}
-        stopTimer={startTimer}
+        stopTimer={stopTimer}
       />
 
       <p className='text-gray-400 mt-10 text-center'>VOICEVOX:四国めたん</p>
