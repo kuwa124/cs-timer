@@ -20,9 +20,7 @@ export const useTimer = (announcements: Announcoments[]): UseTimer => {
   const [lastAnnouncementTimeState, setLastAnnouncementTimeState] =
     useRecoilState(lastAnnouncementTimeStateAtom);
   const [isEndingState, setIsEndingState] = useRecoilState(isEndingStateAtom);
-  const [, setAnnouncementsState] = useRecoilState(
-    announcementsStateAtom
-  );
+  const [, setAnnouncementsState] = useRecoilState(announcementsStateAtom);
 
   // setInterval のIDを保持するref
   // useRefを使用することで、値が変更されても再レンダリングが発生しない
@@ -66,7 +64,7 @@ export const useTimer = (announcements: Announcoments[]): UseTimer => {
 
     // タイマーの状態をリセット（終了してない）
     setIsEndingState(false);
-  }, [announce]);
+  }, [announce, isEndingState, setIsEndingState, setTimerstate]);
 
   // タイマーを開始する関数
   // async/awaitを使用して音声の再生を順番に行います
