@@ -1,4 +1,3 @@
-
 import { useAnnounce } from '@/hooks/useAnnounce';
 import { Announcoments } from '@/types/type';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -45,39 +44,25 @@ export const useTimer = (announcements: Announcoments[]): UseTimer => {
     // 終了処理が既に実行されている場合は処理をスキップ
     if (isEndingRef.current) return;
 
-    // 終了処理フラグを立てる
-    isEndingRef.current = true;
+    try {
+      // 終了処理フラグを立てる
+      isEndingRef.current = true;
 
-    // インターバルをクリア
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-
-    // 終了アナウンスを再生
-    await announce('08_end.wav');
-
-    // タイマーの状態をリセット
-    setIsRunning(false);
-    isEndingRef.current = false;
-  }, [announce]);
-
-  // タイマーの時間更新とアナウンスのチェックを行うeffect
-  useEffect(() => {
-    if (isRunning && !isPaused) {
-      // 前回のアナウンス時間と異なる場合のみチェック（二重再生防止）
-      if (timeRemaining !== lastAnnouncementTimeRef.current) {
-        lastAnnouncementTimeRef.current = timeRemaining;
-
-        // 残り時間に応じたアナウンスをチェック
-        checkAnnouncements(timeRemaining);
-
-        // タイマーが0になった場合の処理
-        if (timeRemaining === 0) {
-          handleTimerEnd();
-        }
+      // インターバルをクリア
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
       }
+
+      // 終了アナウンスを再生
+      await announce('08_end.wav');
+
+      // タイマーの状態をリセット
+      setIsRunning(false);
+    } finally {
+      // 終了フラグをリセット（エラーが発生しても必ず実行）
+      isEndingRef.current = false;
     }
-  }, [timeRemaining, isRunning, isPaused, checkAnnouncements, handleTimerEnd]);
+  }, [announce]);
 
   // タイマーを開始する関数
   // async/awaitを使用して音声の再生を順番に行います
@@ -98,23 +83,24 @@ export const useTimer = (announcements: Announcoments[]): UseTimer => {
 
         // 1秒ごとにタイマーを更新
         intervalRef.current = setInterval(() => {
-          setTimeRemaining((prevTime) => {
-            if (prevTime <= 0) {
-              return 0;
-            }
-            return prevTime - 1; // 1秒減らす
-          });
+          setTimeRemaining((prev) => Math.max(0, prev - 1));
         }, 1000);
-      } catch (error) {
-        // エラーが発生した場合の処理
-        console.error('音声再生エラー:', error);
-        setIsStartCountdown(false);
+        // } catch (error) {
+        //   // エラーが発生した場合の処理
+        //   console.error('音声再生エラー:', error);
+        //   setIsStartCountdown(false);
+        // }
+      } finally {
+        // エラーが発生しても、カウントダウン状態はリセット
+        if (isStartCountdown) {
+          setIsStartCountdown(false);
+        }
       }
     } else if (isPaused) {
       // 一時停止中の場合、タイマーを再開
       setIsPaused(false);
       intervalRef.current = setInterval(() => {
-        setTimeRemaining((prevTime) => prevTime - 1);
+        setTimeRemaining((prev) => Math.max(0, prev - 1));
       }, 1000);
     }
   }, [isRunning, isPaused, announce]);
@@ -150,6 +136,24 @@ export const useTimer = (announcements: Announcoments[]): UseTimer => {
     // 秒が1桁の場合は先頭に0を付加
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`; // 10秒未満の場合は0を付加
   }, []);
+
+  // タイマーの時間更新とアナウンスのチェックを行うeffect
+  useEffect(() => {
+    if (isRunning && !isPaused) {
+      // 前回のアナウンス時間と異なる場合のみチェック（二重再生防止）
+      if (timeRemaining !== lastAnnouncementTimeRef.current) {
+        lastAnnouncementTimeRef.current = timeRemaining;
+
+        // 残り時間に応じたアナウンスをチェック
+        checkAnnouncements(timeRemaining);
+
+        // タイマーが0になった場合の処理
+        if (timeRemaining === 0) {
+          handleTimerEnd();
+        }
+      }
+    }
+  }, [timeRemaining, isRunning, isPaused, checkAnnouncements, handleTimerEnd]);
 
   return {
     timeRemaining,
