@@ -54,7 +54,7 @@ export const useTimer = (announcements: Announcoments[]): UseTimer => {
       }
 
       // 終了アナウンスを再生
-      await announce('08_end.wav');
+      await announce('/common/08_end.wav');
 
       // タイマーの状態をリセット
       setIsRunning(false);
@@ -73,9 +73,9 @@ export const useTimer = (announcements: Announcoments[]): UseTimer => {
         setIsStartCountdown(true); // カウントダウン開始
 
         // 開始時の音声を順番に再生
-        await announce('01_ready.wav'); // 「準備」音声
+        await announce('/common/01_ready.wav'); // 「準備」音声
         await sleep(2000); // 2秒待機
-        await announce('02_start.wav'); // 「スタート」音声
+        await announce('/common/02_start.wav'); // 「スタート」音声
 
         // タイマー開始
         setIsStartCountdown(false);
