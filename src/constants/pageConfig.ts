@@ -1,7 +1,8 @@
 import { PageConfig } from '@/types/type';
 
-// ページ設定の定義
-// as constで値を完全に固定する（変更不可にする）
+/** ページ設定の定義 
+ * - as constで値を完全に固定する（変更不可にする）
+*/
 export const PAGE_CONFIG: PageConfig = {
   // Word3級計測ページの設定
   WORD3_CLASS: {
@@ -11,7 +12,12 @@ export const PAGE_CONFIG: PageConfig = {
   // Word3級計測試験前ページの設定
   WORD3_BEFORE_TESTING: {
     title: 'Word3級計測試験前',
-    path: '/Word3BeforeTesting',
+    path: '/word3BeforeTesting',
+  },
+  // Excel3級計測ページの設定
+  EXCEL3_CLASS: {
+    title: 'Excel3級計測',
+    path: '/excel3Class',
   },
 } as const;
 

@@ -7,9 +7,10 @@ import { Announcoments } from '@/types/type';
 type TimerProps = {
   title: string;
   announcements: Announcoments[];
+  time?: number;
 };
 
-export const Timer = ({ title, announcements }: TimerProps) => {
+export const Timer = ({ title, announcements, time }: TimerProps) => {
   const {
     formatTime,
     isPaused,
@@ -18,7 +19,7 @@ export const Timer = ({ title, announcements }: TimerProps) => {
     startTimer,
     stopTimer,
     timeRemaining,
-  } = useTimer(announcements);
+  } = useTimer(announcements,time);
 
   return (
     <div className='p-4'>

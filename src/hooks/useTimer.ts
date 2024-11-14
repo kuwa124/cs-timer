@@ -12,8 +12,8 @@ type UseTimer = {
   formatTime: (seconds: number) => string; // 時間を「分:秒」形式にフォーマットする関数
 };
 
-export const useTimer = (announcements: Announcoments[]): UseTimer => {
-  const [timeRemaining, setTimeRemaining] = useState<number>(50 * 60); // 残り時間の状態（秒）50分を秒に変換
+export const useTimer = (announcements: Announcoments[], time:number = 3000): UseTimer => {
+  const [timeRemaining, setTimeRemaining] = useState<number>(time); // 残り時間の状態（秒）50分を秒に変換(50分*60秒=3000秒)
   const [isRunning, setIsRunning] = useState<boolean>(false); // タイマーが動作中かどうか
   const [isPaused, setIsPaused] = useState<boolean>(false); // 一時停止中かどうか
   const [isStartCountdown, setIsStartCountdown] = useState<boolean>(false); // 開始前のカウントダウン中かどうか
@@ -123,7 +123,7 @@ export const useTimer = (announcements: Announcoments[]): UseTimer => {
     // すべての状態を初期値にリセット
     setIsRunning(false);
     setIsPaused(false);
-    setTimeRemaining(50 * 60); // 50分にリセット
+    setTimeRemaining(time); // 50分にリセット
     lastAnnouncementTimeRef.current = null; // アナウンス時間もリセット
     isEndingRef.current = false; // 終了フラグもリセット
   }, []);
