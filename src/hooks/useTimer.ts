@@ -148,15 +148,7 @@ export const useTimer = (
       // 経過時間（分）を計算
       const totalElapsedSeconds = time - timeRemaining; //合計時間から経過時間を減算
       const currentElapsedMinutes = Math.floor(totalElapsedSeconds / 60); //秒数を60で割って、経過分数を計算（小数点以下切り捨て）
-
-      // 経過時間が0分より大きく、5分の倍数で、かつ前回表示した時間と異なる場合にメッセージを更新
-      if (
-        currentElapsedMinutes > 0 &&
-        currentElapsedMinutes % 5 === 0 &&
-        currentElapsedMinutes !== elapsedMinutes
-      ) {
-        setElapsedMinutes(currentElapsedMinutes);
-      }
+      setElapsedMinutes(currentElapsedMinutes); //経過分数を代入
 
       // 前回のアナウンス時間と異なる場合のみチェック（二重再生防止）
       if (timeRemaining !== lastAnnouncementTimeRef.current) {
