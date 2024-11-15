@@ -1,24 +1,44 @@
-// 再生する音声ファイルの型
+/** 再生する音声ファイルの型
+ * @property {number} time - 経過時間（秒）
+ * @property {string} file - 再生するファイルのパス*/
 export type Announcoments = {
   /** 経過時間（秒） */
   time: number;
-  /** 再生するファイル */
+  /** 再生するファイルのパス*/
   file: string;
 };
 
-// ナビゲーションボタンの型定義
-export type NavigationButton = {
+/** タイトルの型定義
+ * @property {string} subject - 画面に表示する科目名やカテゴリーの文字列
+ * @property {string} level - 試験のレベルを表す文字列（例: "3" など）
+ * @property {string} examMode - 試験のモードやレベルに関連する後半の文章 */
+export type TitleConfig = {
   /** 画面に表示する文字列 */
-  title: string;
-  /** pathはページのURL */
+  subject: string;
+  /** 試験の級の数字 */
+  level: string;
+  /** 級の後半の文章 */
+  examMode: string;
+};
+
+/** ナビゲーションボタンの型定義
+ * @property {TitleConfig} titleConfig - タイトル設定（画面に表示する文字列）
+ * @property {string} path - ページのURL */
+export type NavigationButton = {
+  /** タイトル設定（画面に表示する文字列） */
+  titleConfig: TitleConfig;
+  /** ページのURL */
   path: string;
 };
 
-// ページ設定の定義の型
-// Readonly<T>で全体を包むことで、設定値の変更を防ぐ（読み取り専用になる）
-// https://typescriptbook.jp/reference/type-reuse/utility-types/readonly
-// 参考サイト：サバイバルTypeScript
+/** ページ設定の型定義
+ * - `Readonly<T>`で全体を包むことで、設定値の変更を防ぎ、読み取り専用にする
+ * - 参考サイト：サバイバルTypeScript
+ * - https://typescriptbook.jp/reference/type-reuse/utility-types/readonly
+ * - 任意の文字列キーを使用してナビゲーションボタンの設定を定義
+ * @property {[key: string]} - 任意のページキー
+ * @property {NavigationButton} - ページ設定用のナビゲーションボタン */
 export type PageConfig = Readonly<{
-  // [key: string]は、任意の文字列をキーとして使えることを示す
+  /** 任意のページキー */
   [key: string]: Readonly<NavigationButton>;
 }>;

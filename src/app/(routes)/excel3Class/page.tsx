@@ -1,3 +1,4 @@
+import { Header } from '@/app/components/Header';
 import { Timer } from '@/app/components/Timer';
 import { getPageData } from '@/constants/pageConfig';
 import { Announcoments } from '@/types/type';
@@ -16,11 +17,8 @@ const excel3ClassAnnouncements: Announcoments[] = [
 const Excel3Class = () => {
   return (
     <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
-      <Timer
-        title={getPageData('EXCEL3_CLASS').title}
-        announcements={excel3ClassAnnouncements}
-        time={2700}
-      />
+      <Header title={getPageData('EXCEL3_CLASS').titleConfig} />
+      <Timer announcements={excel3ClassAnnouncements} time={2700} />
     </div>
   );
 };

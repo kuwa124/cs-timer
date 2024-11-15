@@ -1,3 +1,4 @@
+import { Header } from '@/app/components/Header';
 import { Timer } from '@/app/components/Timer';
 import { getPageData } from '@/constants/pageConfig';
 import { Announcoments } from '@/types/type';
@@ -15,10 +16,8 @@ const Word3ClassAnnouncements: Announcoments[] = [
 const Word3Class = () => {
   return (
     <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
-      <Timer
-        title={getPageData('WORD3_CLASS').title}
-        announcements={Word3ClassAnnouncements}
-      />
+      <Header title={getPageData('WORD3_CLASS').titleConfig} />
+      <Timer announcements={Word3ClassAnnouncements} />
     </div>
   );
 };

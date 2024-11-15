@@ -24,15 +24,17 @@ export const HomePage = () => {
           CS検定練習　時間計測
         </h1>
 
+        {/* ボタン部分を展開 */}
         <nav className='flex flex-col items-center space-y-4 text-gray-600'>
           {navigationButtons.map((navi) => (
             <Link
-              key={navi.title}
+              key={navi.path}
               href={navi.path}
               className='w-56 mx-auto px-8 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition'
-              aria-label={`${navi.title}へ移動`}
+              aria-label={`${Object.values(navi.titleConfig).join('')}へ移動`} //titleConfigを連結してタイトル作成
             >
-              {navi.title}
+              {/* titleConfigを連結してタイトル作成 */}
+              {Object.values(navi.titleConfig).join('')}
             </Link>
           ))}
         </nav>

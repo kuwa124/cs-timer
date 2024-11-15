@@ -1,16 +1,14 @@
 'use client';
 
-import { ReturnHome } from '@/app/components/ReturnHome';
 import { useTimer } from '@/hooks/useTimer';
 import { Announcoments } from '@/types/type';
 
 type TimerProps = {
-  title: string;
   announcements: Announcoments[];
   time?: number;
 };
 
-export const Timer = ({ title, announcements, time }: TimerProps) => {
+export const Timer = ({ announcements, time }: TimerProps) => {
   const {
     formatTime,
     isPaused,
@@ -24,26 +22,16 @@ export const Timer = ({ title, announcements, time }: TimerProps) => {
 
   return (
     <div className='p-4 flex flex-col  items-center'>
-      {/* タイトル部分 */}
-      <div className='flex justify-between items-center w-full'>
-        <div className='flex-1'></div>
-        <h1 className='text-gray-600 tracking-wide text-center text-4xl'>
-          {title}
-        </h1>
-        <div className='flex-1 text-right'>
-          <ReturnHome />
-        </div>
-      </div>
-
       {/* タイマー表示 */}
       {elapsedMinutes !== 0 && (
-      <p className='text-gray-500 text-sm'>
-        経過時間:　
-        <span className='tracking-wider text-gray-600 font-medium text-xl'>
-          {elapsedMinutes}
-        </span>
-        分
-      </p>
+        <p className='text-gray-500 text-sm'>
+          経過時間:　
+          <span className='tracking-wider text-gray-600 font-medium text-xl'>
+            {elapsedMinutes}
+          </span>
+          分
+        </p>
+      )}
 
       <p className='text-gray-500 text-lg font-normal mt-4'>- 残り時間 -</p>
       <h1 className='text-[250px] font-bold text-gray-800  text-center'>
