@@ -19,12 +19,13 @@ export const Timer = ({ title, announcements, time }: TimerProps) => {
     startTimer,
     stopTimer,
     timeRemaining,
-  } = useTimer(announcements,time);
+    elapsedMinutes,
+  } = useTimer(announcements, time);
 
   return (
-    <div className='p-4'>
+    <div className='p-4 flex flex-col  items-center'>
       {/* タイトル部分 */}
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center w-full'>
         <div className='flex-1'></div>
         <h1 className='text-gray-600 tracking-wide text-center text-4xl'>
           {title}
@@ -35,9 +36,18 @@ export const Timer = ({ title, announcements, time }: TimerProps) => {
       </div>
 
       {/* タイマー表示 */}
-      <div className='text-[300px] font-bold text-gray-800  text-center'>
+      <p className='text-gray-500 text-sm'>
+        経過時間:　
+        <span className='tracking-wider text-gray-600 font-medium text-xl'>
+          {elapsedMinutes}
+        </span>
+        分
+      </p>
+
+      <p className='text-gray-500 text-lg font-normal mt-4'>- 残り時間 -</p>
+      <h1 className='text-[250px] font-bold text-gray-800  text-center'>
         {formatTime(timeRemaining)}
-      </div>
+      </h1>
 
       {/* ボタンコンテナ */}
       <div className='flex justify-center space-x-4'>

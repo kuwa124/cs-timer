@@ -10,13 +10,18 @@ type UseTimer = {
   pauseTimer: () => void; // タイマーを一時停止する関数
   stopTimer: () => void; // タイマーを停止する関数
   formatTime: (seconds: number) => string; // 時間を「分:秒」形式にフォーマットする関数
+  elapsedMinutes: number; //経過時間（分）
 };
 
-export const useTimer = (announcements: Announcoments[], time:number = 3000): UseTimer => {
+export const useTimer = (
+  announcements: Announcoments[],
+  time: number = 3000
+): UseTimer => {
   const [timeRemaining, setTimeRemaining] = useState<number>(time); // 残り時間の状態（秒）50分を秒に変換(50分*60秒=3000秒)
   const [isRunning, setIsRunning] = useState<boolean>(false); // タイマーが動作中かどうか
   const [isPaused, setIsPaused] = useState<boolean>(false); // 一時停止中かどうか
   const [isStartCountdown, setIsStartCountdown] = useState<boolean>(false); // 開始前のカウントダウン中かどうか
+  const [elapsedMinutes, setElapsedMinutes] = useState<number>(0); //経過時間の状態
 
   // setInterval のIDを保持するref
   // useRefを使用することで、値が変更されても再レンダリングが発生しない
@@ -140,6 +145,19 @@ export const useTimer = (announcements: Announcoments[], time:number = 3000): Us
   // タイマーの時間更新とアナウンスのチェックを行うeffect
   useEffect(() => {
     if (isRunning && !isPaused) {
+      // 経過時間（分）を計算
+      const totalElapsedSeconds = time - timeRemaining; //合計時間から経過時間を減算
+      const currentElapsedMinutes = Math.floor(totalElapsedSeconds / 60); //秒数を60で割って、経過分数を計算（小数点以下切り捨て）
+
+      // 経過時間が0分より大きく、5分の倍数で、かつ前回表示した時間と異なる場合にメッセージを更新
+      if (
+        currentElapsedMinutes > 0 &&
+        currentElapsedMinutes % 5 === 0 &&
+        currentElapsedMinutes !== elapsedMinutes
+      ) {
+        setElapsedMinutes(currentElapsedMinutes);
+      }
+
       // 前回のアナウンス時間と異なる場合のみチェック（二重再生防止）
       if (timeRemaining !== lastAnnouncementTimeRef.current) {
         lastAnnouncementTimeRef.current = timeRemaining;
@@ -163,5 +181,6 @@ export const useTimer = (announcements: Announcoments[], time:number = 3000): Us
     pauseTimer,
     stopTimer,
     formatTime,
+    elapsedMinutes,
   };
 };
