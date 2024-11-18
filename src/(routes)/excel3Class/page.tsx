@@ -1,5 +1,5 @@
-import { Header } from '@/app/components/Header';
-import { Timer } from '@/app/components/Timer';
+import { Header } from '@/components/Header';
+import { Timer } from '@/components/Timer';
 import { getPageData } from '@/constants/pageConfig';
 import { Announcoments } from '@/types/type';
 
