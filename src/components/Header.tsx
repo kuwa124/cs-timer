@@ -1,4 +1,4 @@
-import { ReturnHome } from '@/app/components/ReturnHome';
+import { ReturnHome } from '@/components/ReturnHome';
 import { TitleConfig } from '@/types/type';
 
 type HeaderProps = {
