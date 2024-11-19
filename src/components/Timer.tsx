@@ -26,7 +26,7 @@ export const Timer = ({ announcements, time }: TimerProps) => {
       {elapsedMinutes !== 0 && (
         <p className='text-gray-500'>
           経過時間:　
-          <span className='tracking-wider text-gray-600 font-medium text-3xl'>
+          <span className='tracking-wider text-gray-600 font-medium text-4xl'>
             {elapsedMinutes}
           </span>
           分
