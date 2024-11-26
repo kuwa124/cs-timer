@@ -14,6 +14,7 @@ export const PAGE_CONFIG: PageConfig = {
     },
     path: '/word3Class',
   },
+
   // Word3級計測試験前ページの設定
   WORD3_BEFORE_TESTING: {
     titleConfig: {
@@ -33,6 +34,7 @@ export const PAGE_CONFIG: PageConfig = {
     },
     path: '/wordAll',
   },
+
   // Excel3級計測ページの設定
   EXCEL3_CLASS: {
     titleConfig: {
@@ -42,6 +44,7 @@ export const PAGE_CONFIG: PageConfig = {
     },
     path: '/excel3Class',
   },
+
   // Excel3級計測試験前ページの設定
   EXCEL3_BEFORE_TESTING: {
     titleConfig: {
@@ -51,6 +54,16 @@ export const PAGE_CONFIG: PageConfig = {
     },
     path: '/excel3BeforeTesting',
   },
+
+  // Excel2級、3級計測ページの設定
+  EXCEL_ALL: {
+    titleConfig: {
+      subject: 'Excel',
+      level: '2・3',
+      examMode: '級計測',
+    },
+    path: '/excelAll',
+  },
 } as const;
 
 // PAGE_CONFIGのキー（WORD3_CLASSなど）の型を作成
@@ -59,7 +72,7 @@ export type PageConfigKey = keyof typeof PAGE_CONFIG;
 
 // ページ設定を安全に取得するための関数
 // 引数keyには、PageConfigKeyの型（WORD3_CLASS、WORD3_BEFORE_TESTINGなど）しか受け付けない
-// `src\constants\navigation.ts` で使用しています。
+// `project://src/constants/navigation.ts ` で使用しています。
 export function getPageData(key: PageConfigKey) {
   // 指定されたキーに対応するページ設定を返す
   return PAGE_CONFIG[key];
