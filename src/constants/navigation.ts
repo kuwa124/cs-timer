@@ -4,7 +4,7 @@ import { NavigationButton } from '@/types/type';
 // ページ間の移動用ボタンの設定を配列で定義
 // getPageData関数で安全にデータを取得
 // `project://src\constants\pageConfig.ts ` から取得します。
-export const navigationButtons: NavigationButton[] = [
+export const testingBeforeNavigationButtons: NavigationButton[] = [
   {
     titleConfig: getPageData('WORD3_CLASS').titleConfig, // ボタンに表示するテキスト
     path: getPageData('WORD3_CLASS').path, // クリック時の移動先URL
@@ -28,5 +28,12 @@ export const navigationButtons: NavigationButton[] = [
   {
     titleConfig: getPageData('EXCEL_ALL').titleConfig, // ボタンに表示するテキスト
     path: getPageData('EXCEL_ALL').path, // クリック時の移動先URL
+  },
+];
+
+export const testNavigationButtons: NavigationButton[] = [
+  {
+    titleConfig: getPageData('WORD3_CLASS').titleConfig, // ボタンに表示するテキスト
+    path: getPageData('WORD3_CLASS').path, // クリック時の移動先URL
   },
 ];
