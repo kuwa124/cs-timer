@@ -6,11 +6,11 @@ import { Announcoments } from '@/types/type';
 const excel3BeforeTestingAnnouncements: Announcoments[] = [
   // 45分（2700秒）から経過した分数後にアナウンス
   // 何分経過後のアナウンスか、わかりやすいように「○○ * 60」で記載
-  { time: 3000 - 30 * 60, file: '/common/03_30minProgress.wav' },
-  { time: 3000 - 35 * 60, file: '/common/04_10minutesAgo.wav' },
-  { time: 3000 - 40 * 60, file: '/common/05_5minutesAgo.wav' },
-  { time: 3000 - 42 * 60, file: '/common/06_3minutesAgo.wav' },
-  { time: 3000 - 44 * 60, file: '/common/07_1minutesAgo.wav' },
+  { time: 2700 - 30 * 60, file: '/common/03_30minProgress.wav' },
+  { time: 2700 - 35 * 60, file: '/common/04_10minutesAgo.wav' },
+  { time: 2700 - 40 * 60, file: '/common/05_5minutesAgo.wav' },
+  { time: 2700 - 42 * 60, file: '/common/06_3minutesAgo.wav' },
+  { time: 2700 - 44 * 60, file: '/common/07_1minutesAgo.wav' },
 ];
 
 const Excel3BeforeTesting = () => {
