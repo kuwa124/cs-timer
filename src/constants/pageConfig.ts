@@ -23,6 +23,16 @@ export const PAGE_CONFIG: PageConfig = {
     },
     path: '/word3BeforeTesting',
   },
+
+  // Word2級、3級計測ページの設定
+  WORD_ALL: {
+    titleConfig: {
+      subject: 'Word',
+      level: '2・3',
+      examMode: '級計測',
+    },
+    path: '/wordAll',
+  },
   // Excel3級計測ページの設定
   EXCEL3_CLASS: {
     titleConfig: {
@@ -32,6 +42,7 @@ export const PAGE_CONFIG: PageConfig = {
     },
     path: '/excel3Class',
   },
+  // Excel3級計測試験前ページの設定
   EXCEL3_BEFORE_TESTING: {
     titleConfig: {
       subject: 'Excel',
