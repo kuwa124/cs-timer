@@ -31,6 +31,14 @@ export const PAGE_CONFIG: PageConfig = {
     },
     path: '/excel3Class',
   },
+  EXCEL3_BEFORE_CLASS: {
+    titleConfig: {
+      subject: 'Excel',
+      level: '3',
+      examMode: '級計測試験前',
+    },
+    path: '/excel3BeforeTesting',
+  },
 } as const;
 
 // PAGE_CONFIGのキー（WORD3_CLASSなど）の型を作成

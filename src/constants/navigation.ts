@@ -16,4 +16,8 @@ export const navigationButtons: NavigationButton[] = [
     titleConfig: getPageData('EXCEL3_CLASS').titleConfig, // ボタンに表示するテキスト
     path: getPageData('EXCEL3_CLASS').path, // クリック時の移動先URL
   },
+  {
+    titleConfig: getPageData('EXCEL3_BEFORE_CLASS').titleConfig, // ボタンに表示するテキスト
+    path: getPageData('EXCEL3_BEFORE_CLASS').path, // クリック時の移動先URL
+  },
 ];
