@@ -1,4 +1,4 @@
-import { ReturnHome } from '@/app/components/ReturnHome';
+import { ReturnHome } from '@/components/ReturnHome';
 import { TitleConfig } from '@/types/type';
 
 type HeaderProps = {
@@ -11,9 +11,9 @@ export const Header = ({ title }: HeaderProps) => {
     //タイトル部分
     <div className='flex justify-between items-center container mx-auto px-10'>
       <div className='flex-1'></div>
-      <h1 className='text-gray-600 tracking-wide text-center text-3xl'>
+      <h1 className='text-gray-600 tracking-wide text-center text-4xl'>
         {subject}
-        <span className='text-gray-700 text-5xl font-medium'>{level}</span>
+        <span className='text-gray-700 text-6xl font-medium'>{level}</span>
         {examMode}
       </h1>
 
