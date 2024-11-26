@@ -46,7 +46,7 @@ export const PAGE_CONFIG: PageConfig = {
 export type PageConfigKey = keyof typeof PAGE_CONFIG;
 
 // ページ設定を安全に取得するための関数
-// 引数keyには、PageConfigKeyの型（WORD3_CLASS、WORD3_BEFORE_TESTING）しか受け付けない
+// 引数keyには、PageConfigKeyの型（WORD3_CLASS、WORD3_BEFORE_TESTINGなど）しか受け付けない
 export function getPageData(key: PageConfigKey) {
   // 指定されたキーに対応するページ設定を返す
   return PAGE_CONFIG[key];
