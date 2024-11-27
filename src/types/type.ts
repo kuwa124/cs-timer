@@ -42,3 +42,18 @@ export type PageConfig = Readonly<{
   /** 任意のページキー */
   [key: string]: Readonly<NavigationButton>;
 }>;
+
+
+/** タイマーコンポーネントのプロパティ型
+ * @property {Announcoments[]} announcements - 経過時間ごとに再生する音声ファイルの一覧
+ * @property {number} [time] - タイマーの初期時間（秒）
+ * @property {string} [readySound] - タイマー準備完了時に再生する音声ファイル
+ * @property {string} [endSound] - タイマー終了時に再生する音声ファイル
+ */
+
+export type TimerProps = {
+  announcements: Announcoments[];
+  time?: number;
+  readySound?: string;
+  endSound?: string;
+};

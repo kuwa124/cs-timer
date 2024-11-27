@@ -1,14 +1,14 @@
 'use client';
 
 import { useTimer } from '@/hooks/useTimer';
-import { Announcoments } from '@/types/type';
+import { TimerProps } from '@/types/type';
 
-type TimerProps = {
-  announcements: Announcoments[];
-  time?: number;
-};
-
-export const Timer = ({ announcements, time }: TimerProps) => {
+export const Timer = ({
+  announcements,
+  time,
+  readySound,
+  endSound,
+}: TimerProps) => {
   const {
     formatTime,
     isPaused,
@@ -18,7 +18,7 @@ export const Timer = ({ announcements, time }: TimerProps) => {
     stopTimer,
     timeRemaining,
     elapsedMinutes,
-  } = useTimer(announcements, time);
+  } = useTimer({ announcements, time, readySound, endSound });
 
   return (
     <div className='p-4 flex flex-col  items-center'>

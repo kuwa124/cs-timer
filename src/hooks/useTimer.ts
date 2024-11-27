@@ -1,5 +1,5 @@
 import { useAnnounce } from '@/hooks/useAnnounce';
-import { Announcoments } from '@/types/type';
+import { TimerProps } from '@/types/type';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 type UseTimer = {
@@ -13,17 +13,12 @@ type UseTimer = {
   elapsedMinutes: number; //経過時間（分）
 };
 
-type UseTimerProps = {
-  announcements: Announcoments[];
-  time?: number;
-  readySound: string;
-};
-
 export const useTimer = ({
   announcements,
   time = 3000,
   readySound = '/common/01_ready.wav',
-}: UseTimerProps): UseTimer => {
+  endSound = '/common/08_end.wav',
+}: TimerProps): UseTimer => {
   const [timeRemaining, setTimeRemaining] = useState<number>(time); // 残り時間の状態（秒）50分を秒に変換(50分*60秒=3000秒)
   const [isRunning, setIsRunning] = useState<boolean>(false); // タイマーが動作中かどうか
   const [isPaused, setIsPaused] = useState<boolean>(false); // 一時停止中かどうか
@@ -66,7 +61,7 @@ export const useTimer = ({
       }
 
       // 終了アナウンスを再生
-      await announce('/common/08_end.wav');
+      await announce(endSound);
 
       // タイマーの状態をリセット
       setIsRunning(false);
