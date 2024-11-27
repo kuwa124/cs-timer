@@ -11,6 +11,7 @@ type UseTimer = {
   stopTimer: () => void; // タイマーを停止する関数
   formatTime: (seconds: number) => string; // 時間を「分:秒」形式にフォーマットする関数
   elapsedMinutes: number; //経過時間（分）
+  isStartCountdown: boolean;
 };
 
 export const useTimer = ({
@@ -176,5 +177,6 @@ export const useTimer = ({
     stopTimer,
     formatTime,
     elapsedMinutes,
+    isStartCountdown,
   };
 };

@@ -18,6 +18,7 @@ export const Timer = ({
     stopTimer,
     timeRemaining,
     elapsedMinutes,
+    isStartCountdown,
   } = useTimer({ announcements, time, readySound, endSound });
 
   return (
@@ -42,8 +43,11 @@ export const Timer = ({
       <div className='flex justify-center space-x-4'>
         {!isRunning || isPaused ? (
           <button
-            className='px-6 py-3 bg-green-400 shadow-lg w-32 text-white rounded-lg text-xl hover:bg-green-600 transition-colors duration-300'
+            className={`px-6 py-3 bg-green-400 shadow-lg w-32 text-white rounded-lg text-xl hover:bg-green-600 transition-colors duration-300 ${
+              isStartCountdown && 'cursor-not-allowed'
+            }`}
             onClick={startTimer}
+            disabled={isStartCountdown}
           >
             {isPaused ? '再開' : '再生'}
           </button>
