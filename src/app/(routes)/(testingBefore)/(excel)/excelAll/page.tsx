@@ -12,6 +12,7 @@ const excelAllTestingAnnouncements: Announcoments[] = [
   { time: 3600 - 42 * 60, file: '/threeLevel/03_3minutesAgo.wav' },
   { time: 3600 - 44 * 60, file: '/threeLevel/04_1minutesAgo.wav' },
   { time: 3600 - 45 * 60, file: '/threeLevel/05_end.wav' },
+  { time: 3600 - 50 * 60, file: '/common/04_10minutesAgo.wav' },
   { time: 3600 - 55 * 60, file: '/common/05_5minutesAgo.wav' },
   { time: 3600 - 57 * 60, file: '/common/06_3minutesAgo.wav' },
   { time: 3600 - 59 * 60, file: '/common/07_1minutesAgo.wav' },
