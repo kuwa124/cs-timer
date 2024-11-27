@@ -8,7 +8,7 @@ export const PAGE_CONFIG: PageConfig = {
   // Word3級計測ページの設定
   WORD3_CLASS: {
     titleConfig: {
-      subject: 'Word',
+      subject: 'Word ',
       level: '3',
       examMode: '級計測',
     },
@@ -18,7 +18,7 @@ export const PAGE_CONFIG: PageConfig = {
   // Word3級計測試験前ページの設定
   WORD3_BEFORE_TESTING: {
     titleConfig: {
-      subject: 'Word',
+      subject: 'Word ',
       level: '3',
       examMode: '級計測試験前',
     },
@@ -28,7 +28,7 @@ export const PAGE_CONFIG: PageConfig = {
   // Word2級、3級計測ページの設定
   WORD_ALL: {
     titleConfig: {
-      subject: 'Word',
+      subject: 'Word ',
       level: '2・3',
       examMode: '級計測',
     },
@@ -48,7 +48,7 @@ export const PAGE_CONFIG: PageConfig = {
   // Excel3級計測ページの設定
   EXCEL3_CLASS: {
     titleConfig: {
-      subject: 'Excel',
+      subject: 'Exce l',
       level: '3',
       examMode: '級計測',
     },
@@ -58,7 +58,7 @@ export const PAGE_CONFIG: PageConfig = {
   // Excel3級計測試験前ページの設定
   EXCEL3_BEFORE_TESTING: {
     titleConfig: {
-      subject: 'Excel',
+      subject: 'Excel ',
       level: '3',
       examMode: '級計測試験前',
     },
@@ -68,7 +68,7 @@ export const PAGE_CONFIG: PageConfig = {
   // Excel2級、3級計測ページの設定
   EXCEL_ALL: {
     titleConfig: {
-      subject: 'Excel',
+      subject: 'Excel ',
       level: '2・3',
       examMode: '級計測',
     },
@@ -77,7 +77,7 @@ export const PAGE_CONFIG: PageConfig = {
 
   WORD3_TESTING: {
     titleConfig: {
-      subject: 'Word',
+      subject: 'Word ',
       level: '3',
       examMode: '級 CS検定',
     },
@@ -86,7 +86,7 @@ export const PAGE_CONFIG: PageConfig = {
 
   WORD2_TESTING: {
     titleConfig: {
-      subject: 'Word',
+      subject: 'Word ',
       level: '3・2',
       examMode: '級 CS検定',
     },
@@ -95,7 +95,7 @@ export const PAGE_CONFIG: PageConfig = {
 
   EXCEL3_TESTING: {
     titleConfig: {
-      subject: 'Excel',
+      subject: 'Excel ',
       level: '3',
       examMode: '級 CS検定',
     },
@@ -104,7 +104,7 @@ export const PAGE_CONFIG: PageConfig = {
 
   EXCEL2_TESTING: {
     titleConfig: {
-      subject: 'Excel',
+      subject: 'Excel ',
       level: '3・2',
       examMode: '級 CS検定',
     },
