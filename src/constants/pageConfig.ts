@@ -74,6 +74,42 @@ export const PAGE_CONFIG: PageConfig = {
     },
     path: '/excelAll',
   },
+
+  WORD3_TESTING: {
+    titleConfig: {
+      subject: 'Word',
+      level: '3',
+      examMode: '級 CS検定',
+    },
+    path: '/word3Testing',
+  },
+
+  WORD2_TESTING: {
+    titleConfig: {
+      subject: 'Word',
+      level: '3・2',
+      examMode: '級 CS検定',
+    },
+    path: '/word2Testing',
+  },
+
+  EXCEL3_TESTING: {
+    titleConfig: {
+      subject: 'Excel',
+      level: '3',
+      examMode: '級 CS検定',
+    },
+    path: '/excel3Testing',
+  },
+
+  EXCEL2_TESTING: {
+    titleConfig: {
+      subject: 'Excel',
+      level: '3・2',
+      examMode: '級 CS検定',
+    },
+    path: '/excel2Testing',
+  },
 } as const;
 
 // PAGE_CONFIGのキー（WORD3_CLASSなど）の型を作成

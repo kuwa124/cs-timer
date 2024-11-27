@@ -3,7 +3,7 @@ import { Timer } from '@/components/Timer';
 import { getPageData } from '@/constants/pageConfig';
 import { Announcoments } from '@/types/type';
 
-const Excel3TestingAnnouncements: Announcoments[] = [
+const Excel2TestingAnnouncements: Announcoments[] = [
   // 45分（2700秒）から経過した分数後にアナウンス
   // 何分経過後のアナウンスか、わかりやすいように「○○ * 60」で記載
   { time: 3000 - 30 * 60, file: '/common/03_30minProgress.wav' },
@@ -13,13 +13,13 @@ const Excel3TestingAnnouncements: Announcoments[] = [
   { time: 3000 - 44 * 60, file: '/common/07_1minutesAgo.wav' },
 ];
 
-const Excel3Testing = () => {
+const Excel2Testing = () => {
   return (
     <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
-      <Header title={getPageData('EXCEL3_TESTING').titleConfig} />
-      <Timer announcements={Excel3TestingAnnouncements} time={2700}/>
+      <Header title={getPageData('EXCEL2_TESTING').titleConfig} />
+      <Timer announcements={Excel2TestingAnnouncements} time={2700}/>
     </div>
   );
 };
 
-export default Excel3Testing;
+export default Excel2Testing;

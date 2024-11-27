@@ -46,7 +46,22 @@ export const testingBeforeNavigationButtons: NavigationButton[] = [
 // CS検定用
 export const testNavigationButtons: NavigationButton[] = [
   {
-    titleConfig: getPageData('WORD3_CLASS').titleConfig, // ボタンに表示するテキスト
-    path: getPageData('WORD3_CLASS').path, // クリック時の移動先URL
+    titleConfig: getPageData('WORD3_TESTING').titleConfig, // ボタンに表示するテキスト
+    path: getPageData('WORD3_TESTING').path, // クリック時の移動先URL
+  },
+
+  {
+    titleConfig: getPageData('WORD2_TESTING').titleConfig, // ボタンに表示するテキスト
+    path: getPageData('WORD2_TESTING').path, // クリック時の移動先URL
+  },
+
+  {
+    titleConfig: getPageData('EXCEL3_TESTING').titleConfig, // ボタンに表示するテキスト
+    path: getPageData('EXCEL3_TESTING').path, // クリック時の移動先URL
+  },
+
+  {
+    titleConfig: getPageData('EXCEL2_TESTING').titleConfig, // ボタンに表示するテキスト
+    path: getPageData('EXCEL2_TESTING').path, // クリック時の移動先URL
   },
 ];
