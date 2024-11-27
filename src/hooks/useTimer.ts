@@ -26,6 +26,41 @@ export const useTimer = ({
   const [isStartCountdown, setIsStartCountdown] = useState<boolean>(false); // 開始前のカウントダウン中かどうか
   const [elapsedMinutes, setElapsedMinutes] = useState<number>(0); //経過時間の状態
 
+  // 音声のプリロード状態を管理
+  const [isAudioReady, setIsAudioReady] = useState(false);
+
+  // コンポーネントマウント時(画面が表示された時)に音声をプリロード(事前に読み込み)する
+  useEffect(() => {
+    // 音声を事前に読み込む非同期関数を定義
+    const preloadAudios = async () => {
+      // 準備音声のAudioオブジェクトを作成
+      const audio1 = new Audio(`/audio${readySound}`);
+      // スタート音声のAudioオブジェクトを作成
+      const audio2 = new Audio('/audio/common/02_start.wav');
+
+      // Promise.all()で複数の音声の読み込み完了を待機
+      // 全ての音声が読み込まれるまで処理を待つ
+      await Promise.all([
+        // 1つ目の音声(audio1)の読み込み完了を待つPromise
+        new Promise((resolve) => {
+          // canplaythroughイベント:音声の再生に十分なデータが読み込まれた時に発火
+          // once: trueで1回だけイベントを実行(メモリ節約)
+          audio1.addEventListener('canplaythrough', resolve, { once: true });
+        }),
+        // 2つ目の音声(audio2)の読み込み完了を待つPromise
+        new Promise((resolve) => {
+          audio2.addEventListener('canplaythrough', resolve, { once: true });
+        }),
+      ]);
+
+      // 全ての音声の読み込みが完了したらフラグをtrueに設定
+      setIsAudioReady(true);
+    };
+
+    // 定義した関数を実行
+    preloadAudios();
+  }, []);
+
   // setInterval のIDを保持するref
   // useRefを使用することで、値が変更されても再レンダリングが発生しない
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -46,31 +81,6 @@ export const useTimer = ({
   const sleep = (ms: number): Promise<void> => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   };
-
-  // タイマー終了時の処理を行う関数
-  const handleTimerEnd = useCallback(async () => {
-    // 終了処理が既に実行されている場合は処理をスキップ
-    if (isEndingRef.current) return;
-
-    try {
-      // 終了処理フラグを立てる
-      isEndingRef.current = true;
-
-      // インターバルをクリア
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-
-      // 終了アナウンスを再生
-      await announce(endSound);
-
-      // タイマーの状態をリセット
-      setIsRunning(false);
-    } finally {
-      // 終了フラグをリセット（エラーが発生しても必ず実行）
-      isEndingRef.current = false;
-    }
-  }, [announce]);
 
   // タイマーを開始する関数
   // async/awaitを使用して音声の再生を順番に行います
@@ -112,6 +122,31 @@ export const useTimer = ({
       }, 1000);
     }
   }, [isRunning, isPaused, announce]);
+
+  // タイマー終了時の処理を行う関数
+  const handleTimerEnd = useCallback(async () => {
+    // 終了処理が既に実行されている場合は処理をスキップ
+    if (isEndingRef.current) return;
+
+    try {
+      // 終了処理フラグを立てる
+      isEndingRef.current = true;
+
+      // インターバルをクリア
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }  
+
+      // 終了アナウンスを再生
+      await announce(endSound);
+
+      // タイマーの状態をリセット
+      setIsRunning(false);
+    } finally {
+      // 終了フラグをリセット（エラーが発生しても必ず実行）
+      isEndingRef.current = false;
+    }  
+  }, [announce]);  
 
   // タイマーを一時停止する関数
   const pauseTimer = useCallback(() => {
