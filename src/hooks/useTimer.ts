@@ -13,10 +13,17 @@ type UseTimer = {
   elapsedMinutes: number; //経過時間（分）
 };
 
-export const useTimer = (
-  announcements: Announcoments[],
-  time: number = 3000
-): UseTimer => {
+type UseTimerProps = {
+  announcements: Announcoments[];
+  time?: number;
+  readySound: string;
+};
+
+export const useTimer = ({
+  announcements,
+  time = 3000,
+  readySound = '/common/01_ready.wav',
+}: UseTimerProps): UseTimer => {
   const [timeRemaining, setTimeRemaining] = useState<number>(time); // 残り時間の状態（秒）50分を秒に変換(50分*60秒=3000秒)
   const [isRunning, setIsRunning] = useState<boolean>(false); // タイマーが動作中かどうか
   const [isPaused, setIsPaused] = useState<boolean>(false); // 一時停止中かどうか
@@ -78,7 +85,7 @@ export const useTimer = (
         setIsStartCountdown(true); // カウントダウン開始
 
         // 開始時の音声を順番に再生
-        await announce('/common/01_ready.wav'); // 「準備」音声
+        await announce(readySound); // 「準備」音声
         await sleep(2000); // 2秒待機
         await announce('/common/02_start.wav'); // 「スタート」音声
 
