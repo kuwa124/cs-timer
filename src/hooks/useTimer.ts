@@ -26,9 +26,6 @@ export const useTimer = ({
   const [isStartCountdown, setIsStartCountdown] = useState<boolean>(false); // 開始前のカウントダウン中かどうか
   const [elapsedMinutes, setElapsedMinutes] = useState<number>(0); //経過時間の状態
 
-  // 音声のプリロード状態を管理
-  const [isAudioReady, setIsAudioReady] = useState(false);
-
   // コンポーネントマウント時(画面が表示された時)に音声をプリロード(事前に読み込み)する
   useEffect(() => {
     // 音声を事前に読み込む非同期関数を定義
@@ -52,14 +49,11 @@ export const useTimer = ({
           audio2.addEventListener('canplaythrough', resolve, { once: true });
         }),
       ]);
-
-      // 全ての音声の読み込みが完了したらフラグをtrueに設定
-      setIsAudioReady(true);
     };
 
     // 定義した関数を実行
     preloadAudios();
-  }, []);
+  }, [readySound]);
 
   // setInterval のIDを保持するref
   // useRefを使用することで、値が変更されても再レンダリングが発生しない
@@ -135,7 +129,7 @@ export const useTimer = ({
       // インターバルをクリア
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
-      }  
+      }
 
       // 終了アナウンスを再生
       await announce(endSound);
@@ -145,8 +139,8 @@ export const useTimer = ({
     } finally {
       // 終了フラグをリセット（エラーが発生しても必ず実行）
       isEndingRef.current = false;
-    }  
-  }, [announce]);  
+    }
+  }, [announce]);
 
   // タイマーを一時停止する関数
   const pauseTimer = useCallback(() => {
