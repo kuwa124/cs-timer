@@ -23,7 +23,7 @@ const allTestingAnnouncements: Announcoments[] = [
 const allTesting = () => {
   return (
     <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
-      <Header title={getPageData('WORD_ALL').titleConfig} />
+      <Header title={getPageData('ALL').titleConfig} />
       <Timer announcements={allTestingAnnouncements} time={3600} />
     </div>
   );

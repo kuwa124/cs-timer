@@ -35,6 +35,16 @@ export const PAGE_CONFIG: PageConfig = {
     path: '/wordAll',
   },
 
+  // Word・Excel 2級、3級計測ページの設定
+  ALL: {
+    titleConfig: {
+      subject: 'Word・Excel ',
+      level: '2・3',
+      examMode: '級計測',
+    },
+    path: '/all',
+  },
+
   // Excel3級計測ページの設定
   EXCEL3_CLASS: {
     titleConfig: {
