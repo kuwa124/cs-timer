@@ -17,7 +17,11 @@ const Word3Testing = () => {
   return (
     <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
       <Header title={getPageData('WORD3_TESTING').titleConfig} />
-      <Timer announcements={word3TestingAnnouncements} />
+      <Timer
+        announcements={word3TestingAnnouncements}
+        readySound='/common/10_testingReady.wav'
+        endSound='/testingWord/06_2LevelEnd.wav'
+      />
     </div>
   );
 };
