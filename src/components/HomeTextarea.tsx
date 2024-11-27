@@ -20,6 +20,7 @@ export const HomeTextarea = () => {
         handleClick={() => setisTestingBefore((prev) => !prev)}
         isTestingBefore={isTestingBefore}
         navigationButtons={testingBeforeNavigationButtons}
+        buttonClassname='grid-rows-4'
         highlightText='練習'
       />
 
@@ -27,7 +28,8 @@ export const HomeTextarea = () => {
         handleClick={() => setIsTest((prev) => !prev)}
         isTestingBefore={isTest}
         navigationButtons={testNavigationButtons}
-        className='pt-8 border-y-4'
+        titleClassName='pt-8 border-y-4'
+        buttonClassname='grid-rows-2'
         highlightText='試験'
       />
     </div>

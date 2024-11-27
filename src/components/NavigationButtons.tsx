@@ -7,7 +7,8 @@ type NavigationButtonsProps = {
   isTestingBefore: boolean;
   navigationButtons: NavigationButton[];
   highlightText: string;
-  className?: string;
+  titleClassName?: string;
+  buttonClassname: string;
 };
 
 export const NavigationButtons = ({
@@ -15,14 +16,15 @@ export const NavigationButtons = ({
   isTestingBefore,
   navigationButtons,
   highlightText,
-  className,
+  titleClassName,
+  buttonClassname,
 }: NavigationButtonsProps) => {
   return (
     <div className=' my-4 w-[600px]'>
       <div
         className={`flex justify-between items-center pb-8 ${
           isTestingBefore && 'border-b-4'
-        } ${className}`}
+        } ${titleClassName}`}
         onClick={handleClick}
       >
         <button className='group text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-600 hover:text-orange-600'>
@@ -43,7 +45,9 @@ export const NavigationButtons = ({
       {/* ` TestingBefore ` のボタン部分を展開 */}
       {/* grid-flow-col:列に縦並びで次の列に進む */}
       {isTestingBefore && (
-        <nav className='grid grid-rows-4 grid-flow-col gap-y-4 gap-x-10 mt-4 text-gray-600'>
+        <nav
+          className={`grid ${buttonClassname} grid-flow-col gap-y-4 gap-x-10 mt-4 text-gray-600`}
+        >
           {navigationButtons.map((navi) => (
             <Link
               key={navi.path}
