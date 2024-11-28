@@ -22,7 +22,7 @@ export const Timer = ({
   } = useTimer({ announcements, time, readySound, endSound });
 
   return (
-    <div className='p-4 flex flex-col  items-center'>
+    <div className='p-4 flex flex-col items-center'>
       {/* タイマー表示 */}
       {elapsedMinutes !== 0 && (
         <p className='text-gray-500'>
@@ -35,7 +35,7 @@ export const Timer = ({
       )}
 
       <p className='text-gray-500 text-lg font-normal mt-4'>- 残り時間 -</p>
-      <h1 className='text-9xl sm:text-[250px] font-bold text-gray-800  text-center'>
+      <h1 className='text-9xl sm:text-[250px] font-bold text-gray-800 text-center mb-10'>
         {formatTime(timeRemaining)}
       </h1>
 
