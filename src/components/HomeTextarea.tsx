@@ -29,7 +29,7 @@ export const HomeTextarea = () => {
         isTestingBefore={isTest}
         navigationButtons={testNavigationButtons}
         titleClassName='pt-8 border-y-4'
-        buttonClassname='grid-rows-2'
+        buttonClassname='grid-rows-3'
         highlightText='試験'
       />
     </div>

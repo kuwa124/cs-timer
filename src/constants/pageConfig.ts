@@ -110,6 +110,15 @@ export const PAGE_CONFIG: PageConfig = {
     },
     path: '/excel2Testing',
   },
+
+  SECOND_TESTING: {
+    titleConfig: {
+      subject: '',
+      level: '2',
+      examMode: '級 CS検定',
+    },
+    path: '/secondTesting',
+  },
 } as const;
 
 // PAGE_CONFIGのキー（WORD3_CLASSなど）の型を作成

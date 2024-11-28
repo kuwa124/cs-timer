@@ -56,6 +56,11 @@ export const testNavigationButtons: NavigationButton[] = [
   },
 
   {
+    titleConfig: getPageData('SECOND_TESTING').titleConfig, // ボタンに表示するテキスト
+    path: getPageData('SECOND_TESTING').path, // クリック時の移動先URL
+  },
+
+  {
     titleConfig: getPageData('EXCEL3_TESTING').titleConfig, // ボタンに表示するテキスト
     path: getPageData('EXCEL3_TESTING').path, // クリック時の移動先URL
   },
