@@ -48,7 +48,7 @@ export const PAGE_CONFIG: PageConfig = {
   // Excel3級計測ページの設定
   EXCEL3_CLASS: {
     titleConfig: {
-      subject: 'Exce l',
+      subject: 'Excel ',
       level: '3',
       examMode: '級計測',
     },
