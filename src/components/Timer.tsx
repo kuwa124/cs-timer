@@ -35,7 +35,7 @@ export const Timer = ({
       )}
 
       <p className='text-gray-500 text-lg font-normal mt-4'>- 残り時間 -</p>
-      <h1 className='text-[250px] font-bold text-gray-800  text-center'>
+      <h1 className='text-9xl sm:text-[250px] font-bold text-gray-800  text-center'>
         {formatTime(timeRemaining)}
       </h1>
 
