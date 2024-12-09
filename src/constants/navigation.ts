@@ -41,6 +41,11 @@ export const testingBeforeNavigationButtons: NavigationButton[] = [
     titleConfig: getPageData('EXCEL_ALL').titleConfig, // ボタンに表示するテキスト
     path: getPageData('EXCEL_ALL').path, // クリック時の移動先URL
   },
+
+  {
+    titleConfig: getPageData('THREE_ALL').titleConfig, // ボタンに表示するテキスト
+    path: getPageData('THREE_ALL').path, // クリック時の移動先URL
+  },
 ];
 
 // CS検定用
