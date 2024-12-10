@@ -14,7 +14,6 @@ const allTestingAnnouncements: Announcoments[] = [
   { time: 3000 - 45 * 60, file: '/testingExcel/05_3LevelEnd.wav' },
   { time: 3000 - 47 * 60, file: '/testingWord/03_3minutesAgo.wav' },
   { time: 3000 - 49 * 60, file: '/testingWord/04_1minutesAgo.wav' },
-  { time: 3000 - 50 * 60, file: '/testingWord/05_3LevelEnd.wav' },
 ];
 
 const allTesting = () => {
