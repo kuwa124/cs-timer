@@ -3,7 +3,7 @@ import { Timer } from '@/components/Timer';
 import { getPageData } from '@/constants/pageConfig';
 import { Announcoments } from '@/types/type';
 
-const allTestingAnnouncements: Announcoments[] = [
+const threeAllAnnouncements: Announcoments[] = [
   // 50分（3000秒）から経過した分数後にアナウンス
   // 何分経過後のアナウンスか、わかりやすいように「○○ * 60」で記載
   { time: 3000 - 30 * 60, file: '/common/03_30minProgress.wav' },
@@ -16,13 +16,13 @@ const allTestingAnnouncements: Announcoments[] = [
   { time: 3000 - 49 * 60, file: '/testingWord/04_1minutesAgo.wav' },
 ];
 
-const allTesting = () => {
+const threeAllTesting = () => {
   return (
     <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
       <Header title={getPageData('THREE_ALL').titleConfig} />
-      <Timer announcements={allTestingAnnouncements} />
+      <Timer announcements={threeAllAnnouncements} />
     </div>
   );
 };
 
-export default allTesting;
+export default threeAllTesting;
